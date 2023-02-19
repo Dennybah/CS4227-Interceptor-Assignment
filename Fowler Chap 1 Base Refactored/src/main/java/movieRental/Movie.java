@@ -1,5 +1,9 @@
 package movieRental;
 
+/**
+ * The movie class represents a movie which is apart of rental.
+ */
+
 public class Movie {
 
     public static final int CHILDRENS = 2;

@@ -1,5 +1,8 @@
 package movieRental;
 
+import movieRental.InterceptorLogger.LoggerDispatcher;
+import movieRental.InterceptorLogger.InventoryCheckLogger;
+
 /**
  * The rental class represents a customer renting a movie.
  */
@@ -11,8 +14,10 @@ public class Rental {
     public Rental(Movie movie, int daysRented) {
         _movie = movie;
         _daysRented = daysRented;
+        InventoryCheckLogger log = new InventoryCheckLogger(this);
+        LoggerDispatcher.getDispatcherInstance().InventoryCheckLogger(log);
     }
-
+    
     public int getDaysRented() {
         return _daysRented;
     }

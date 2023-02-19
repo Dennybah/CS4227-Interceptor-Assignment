@@ -3,17 +3,25 @@ package movieRental;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import movieRental.InterceptorLogger.FreqentRenterPointsLog;
+import movieRental.InterceptorLogger.LoggerDispatcher;
+
+/**
+ * The customer class represents a customer.
+ */
 public class Customer {
 
     private String _name;
     private Vector _rentals = new Vector<>();
 
     public Customer(String name) {
-        _name = name;
+        _name = name;   
     }
 
     public void addRental(Rental arg) {
         _rentals.addElement(arg);
+        FreqentRenterPointsLog log = new FreqentRenterPointsLog(this, arg);
+        LoggerDispatcher.getDispatcherInstance().FreqentRenterPointsLog(log);
     }
 
     public String getName() {
@@ -54,13 +62,14 @@ public class Customer {
         return result;
     }
        
-    private int getTotalFrequentRenterPoints() {
+    public int getTotalFrequentRenterPoints() {
         int result = 0;
         Enumeration rentals = _rentals.elements();
         while (rentals.hasMoreElements()) {
             Rental each = (Rental) rentals.nextElement();
             result += each.getFrequentRenterPoints();
         }
+
         return result;
     }
 
@@ -72,7 +81,6 @@ public class Customer {
             result += each.getCharge();
         }
         return result;
-       
     }
 
 }
