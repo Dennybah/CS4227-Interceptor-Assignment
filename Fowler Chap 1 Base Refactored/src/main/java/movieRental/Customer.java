@@ -20,6 +20,8 @@ public class Customer {
 
     public void addRental(Rental arg) {
         _rentals.addElement(arg);
+        //Interception point used to log the customer and an assigned rental's 
+        //frequent renter points via FrequentRenterPointsLog
         FreqentRenterPointsLog log = new FreqentRenterPointsLog(this, arg);
         LoggerDispatcher.getDispatcherInstance().FreqentRenterPointsLog(log);
     }

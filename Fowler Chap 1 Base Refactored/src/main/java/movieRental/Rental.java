@@ -14,6 +14,7 @@ public class Rental {
     public Rental(Movie movie, int daysRented) {
         _movie = movie;
         _daysRented = daysRented;
+        //Interception point used to log a created rental via InventoryCheckLogger
         InventoryCheckLogger log = new InventoryCheckLogger(this);
         LoggerDispatcher.getDispatcherInstance().InventoryCheckLogger(log);
     }
